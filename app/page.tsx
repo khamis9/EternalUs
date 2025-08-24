@@ -153,14 +153,14 @@ function Dashboard() {
           </div>
           
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleSignOut}
-            className="flex items-center space-x-2 px-4 py-2 bg-email-darker hover:bg-email-dark rounded-lg transition-colors border border-email-border"
             whileHover={{ 
+              scale: 1.05,
               boxShadow: "0 0 15px rgba(220, 38, 38, 0.4)",
               borderColor: "rgba(220, 38, 38, 0.8)"
             }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleSignOut}
+            className="flex items-center space-x-2 px-4 py-2 bg-email-darker hover:bg-email-dark rounded-lg transition-colors border border-email-border"
           >
             <LogOut className="w-4 h-4 text-email-textMuted" />
             <span className="text-email-text text-sm">Sign Out</span>
