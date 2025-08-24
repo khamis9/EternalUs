@@ -4,12 +4,12 @@ A beautiful, romantic anniversary website built with Next.js and Supabase, featu
 
 ## ✨ Features
 
-- **🔐 Secure Authentication**: Only two users (khamiso and reyrey) can access the site
-- **⏰ Live Day Counter**: Shows time since June 25, 2025, updating every second
+- **🔐 Secure Authentication**: Private access for two users
+- **⏰ Live Day Counter**: Shows time since your anniversary date
 - **📱 Instagram-Style Feed**: Beautiful posts with text, images, videos, and audio
 - **📧 Email Notifications**: Get notified when your love shares a new post
 - **🎨 Gothic Romance Theme**: Dark, elegant design with smooth animations
-- **📱 Mobile-First**: Fully responsive design optimized for iPhone 8 Plus and all devices
+- **📱 Mobile-First**: Fully responsive design optimized for all devices
 - **🔄 Real-Time Updates**: Posts appear instantly with live timestamps
 
 ## 🛠️ Tech Stack
@@ -18,7 +18,7 @@ A beautiful, romantic anniversary website built with Next.js and Supabase, featu
 - **Styling**: Tailwind CSS with custom gothic theme
 - **Animations**: Framer Motion
 - **Backend**: Supabase (Database, Auth, Storage)
-- **Email**: Resend
+- **Email**: Brevo (formerly Sendinblue)
 - **Deployment**: Vercel/Netlify/GitHub Pages
 
 ## 🚀 Quick Start
@@ -27,7 +27,7 @@ A beautiful, romantic anniversary website built with Next.js and Supabase, featu
 
 ```bash
 git clone <your-repo-url>
-cd eternal-us-anniversary
+cd EternalUs
 npm install
 ```
 
@@ -46,10 +46,10 @@ Update `.env.local` with your credentials:
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url_here
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
 
-# Email Configuration (Resend)
-RESEND_API_KEY=your_resend_api_key_here
+# Email Configuration (Brevo)
+BREVO_API_KEY=your_brevo_api_key_here
 
-# Anniversary Date (June 25, 2025)
+# Anniversary Date
 NEXT_PUBLIC_ANNIVERSARY_DATE=2025-06-25T00:00:00.000Z
 ```
 
@@ -67,9 +67,7 @@ NEXT_PUBLIC_ANNIVERSARY_DATE=2025-06-25T00:00:00.000Z
 
 3. **Create Users**:
    - Go to Authentication > Users
-   - Create two users with these emails:
-     - `khamiso@eternalus.com`
-     - `reyrey@eternalus.com`
+   - Create two users with your preferred emails
    - Set passwords for both users
 
 4. **Configure Storage**:
@@ -77,24 +75,20 @@ NEXT_PUBLIC_ANNIVERSARY_DATE=2025-06-25T00:00:00.000Z
    - Create a bucket named `posts-media`
    - Set it to public
 
-### 4. Email Setup (Optional)
+### 4. Email Setup
 
-1. **Sign up for Resend**:
-   - Go to [resend.com](https://resend.com)
+1. **Sign up for Brevo**:
+   - Go to [brevo.com](https://brevo.com)
    - Create an account and get your API key
 
 2. **Add API Key to Environment**:
    ```bash
-   RESEND_API_KEY=your_resend_api_key_here
+   BREVO_API_KEY=your_brevo_api_key_here
    ```
 
-3. **Email Addresses Configured**:
-   - Khamiso: khamishussein2003@gmail.com (for testing)
-   - Reyrey: Email removed for surprise (can be added later)
-
-4. **Test Notifications**:
-   - Create a new post
-   - Both users will receive beautiful gothic-themed email notifications
+3. **Configure Email Addresses**:
+   - Update the notification API with your email addresses
+   - Test notifications by creating a new post
 
 ### 5. Run Development Server
 
@@ -106,7 +100,7 @@ Visit [http://localhost:3000](http://localhost:3000) to see your love story! �
 
 ## 📱 Mobile Optimization
 
-The website is fully optimized for mobile devices, especially iPhone 8 Plus:
+The website is fully optimized for mobile devices:
 
 - Responsive design that works on all screen sizes
 - Touch-friendly interface
@@ -119,9 +113,9 @@ The website is fully optimized for mobile devices, especially iPhone 8 Plus:
 
 The gothic romance theme uses custom colors defined in `tailwind.config.js`:
 
-- **Gothic Red**: `#dc2626` - Primary accent color
-- **Dark Background**: `#0f172a` - Deep dark background
-- **Rose Accents**: `#be123c` - Romantic rose colors
+- **Dark Background**: Deep dark backgrounds
+- **Accent Colors**: Romantic accent colors
+- **Gothic Elements**: Elegant gothic styling
 
 ### Fonts
 
@@ -139,64 +133,26 @@ Custom animations include:
 
 ## 🚀 Deployment
 
-### Option 1: Vercel (Recommended)
+### Vercel (Recommended)
 
 1. **Connect to Vercel**:
-   ```bash
-   npm install -g vercel
-   vercel
-   ```
+   - Go to [vercel.com](https://vercel.com)
+   - Sign in with your GitHub account
+   - Import your repository
 
 2. **Add Environment Variables**:
    - Go to your Vercel dashboard
    - Add all environment variables from `.env.local`
 
 3. **Deploy**:
-   ```bash
-   vercel --prod
-   ```
-
-### Option 2: Netlify
-
-1. **Build the project**:
-   ```bash
-   npm run build
-   ```
-
-2. **Deploy to Netlify**:
-   - Drag the `out` folder to Netlify
-   - Or connect your GitHub repo
-
-3. **Add Environment Variables** in Netlify dashboard
-
-### Option 3: GitHub Pages
-
-1. **Update next.config.js**:
-   ```javascript
-   const nextConfig = {
-     output: 'export',
-     trailingSlash: true,
-     images: {
-       unoptimized: true
-     }
-   }
-   ```
-
-2. **Build and deploy**:
-   ```bash
-   npm run build
-   # Upload the out folder to GitHub Pages
-   ```
+   - Vercel will automatically deploy your site
+   - Every push to GitHub triggers a new deployment
 
 ## 🔧 Configuration
 
 ### Authentication
 
-Only two users can access the site:
-- **khamiso** - Username for first user
-- **reyrey** - Username for second user
-
-To change usernames, edit `lib/supabase.ts`:
+Configure allowed users in `lib/supabase.ts`:
 
 ```typescript
 export const ALLOWED_USERS = ['your-username-1', 'your-username-2']
@@ -207,21 +163,13 @@ export const ALLOWED_USERS = ['your-username-1', 'your-username-2']
 Update the anniversary date in `.env.local`:
 
 ```env
-NEXT_PUBLIC_ANNIVERSARY_DATE=2025-06-25T00:00:00.000Z
+NEXT_PUBLIC_ANNIVERSARY_DATE=your-anniversary-date-here
 ```
-
-### Email Notifications
-
-To customize email notifications:
-
-1. Edit `app/api/notify/route.ts`
-2. Update the email template HTML
-3. Change recipient email addresses
 
 ## 📁 Project Structure
 
 ```
-eternal-us-anniversary/
+EternalUs/
 ├── app/
 │   ├── api/notify/route.ts    # Email notification API
 │   ├── globals.css            # Global styles
@@ -285,7 +233,7 @@ eternal-us-anniversary/
    - Ensure file size is under 10MB
 
 3. **Email Notifications Not Working**:
-   - Verify Resend API key is correct
+   - Verify Brevo API key is correct
    - Check email addresses in notification API
    - Ensure API route is accessible
 
@@ -306,4 +254,4 @@ This project is private and created for personal use. Feel free to customize it 
 
 ---
 
-**Built with 💕 for Eternal Us**
+**Built with �� for Eternal Us**
